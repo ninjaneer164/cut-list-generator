@@ -18,6 +18,7 @@ export const cutListSlice = createSlice({
         totalLength,
         woodLength,
         woodList,
+        woodThickness,
       } = CutListUtils.parseJson(action.payload);
       state.bladeThickness = bladeThickness;
       state.projects = projects;
@@ -25,6 +26,7 @@ export const cutListSlice = createSlice({
       state.totalLength = totalLength;
       state.woodLength = woodLength;
       state.woodList = woodList;
+      state.woodThickness = woodThickness;
     },
     setSectionColor: (
       state,

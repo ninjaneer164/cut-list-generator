@@ -7,14 +7,13 @@ export interface CutList {
   totalLength: number;
   woodLength: number;
   woodList: Wood[];
+  woodThickness: number;
 }
 
 export const CutListUtils = {
-  parseJson: (
-    data: any,
-    woodLength: number = 144,
-    bladeThickness: number = 1 / 8
-  ): CutList => {
+  parseJson: (data: any, bladeThickness: number = 1 / 8): CutList => {
+    const woodLength = data.woodLength ?? 144;
+    const woodThickness = data.woodThickness ?? 1.5;
     const nSections = data.projects.reduce(
       (n: number, p: Project) => n + p.sections.length,
       0
@@ -89,6 +88,7 @@ export const CutListUtils = {
       totalLength,
       woodLength,
       woodList: woodList.map((wood) => wood.toWood()),
+      woodThickness,
     };
   },
 };
