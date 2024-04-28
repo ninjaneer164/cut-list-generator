@@ -1,0 +1,206 @@
+{
+  "projects": [
+    {
+      "name": "Mason's Room",
+      "sections": [
+        {
+          "name": "Stairs",
+          "cuts": [
+            {
+              "length": 21,
+              "count": 9
+            },
+            {
+              "length": 10,
+              "count": 2
+            },
+            {
+              "length": 15,
+              "count": 12
+            },
+            {
+              "length": 69.5,
+              "count": 4
+            },
+            {
+              "length": 59.5,
+              "count": 2
+            },
+            {
+              "length": 49.5,
+              "count": 2
+            },
+            {
+              "length": 39.5,
+              "count": 2
+            },
+            {
+              "length": 29.5,
+              "count": 2
+            },
+            {
+              "length": 19.5,
+              "count": 2
+            },
+            {
+              "length": 9.5,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Platform",
+          "cuts": [
+            {
+              "length": 118,
+              "count": 2
+            },
+            {
+              "length": 40.5,
+              "count": 12
+            }
+          ]
+        },
+        {
+          "name": "Frame",
+          "cuts": [
+            {
+              "length": 118,
+              "count": 2
+            },
+            {
+              "length": 42,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Frame A",
+          "cuts": [
+            {
+              "length": 35,
+              "count": 4
+            },
+            {
+              "length": 12,
+              "count": 4
+            }
+          ]
+        },
+        {
+          "name": "Frame B",
+          "cuts": [
+            {
+              "length": 7.5,
+              "count": 4
+            },
+            {
+              "length": 12,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Frame C",
+          "cuts": [
+            {
+              "length": 7.5,
+              "count": 4
+            },
+            {
+              "length": 12,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Frame BC",
+          "cuts": [
+            {
+              "length": 35,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Upper Frame",
+          "cuts": [
+            {
+              "length": 115,
+              "count": 2
+            },
+            {
+              "length": 68,
+              "count": 2
+            },
+            {
+              "length": 65,
+              "count": 2
+            },
+            {
+              "length": 56,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "name": "Ceiling Frame",
+          "cuts": [
+            {
+              "length": 142,
+              "count": 2
+            },
+            {
+              "length": 35,
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Back Room",
+      "sections": [
+        {
+          "name": "",
+          "cuts": [
+            {
+              "length": 132,
+              "count": 1
+            },
+            {
+              "length": 129,
+              "count": 2
+            },
+            {
+              "length": 24,
+              "count": 2
+            },
+            {
+              "length": 21,
+              "count": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bathroom enclosure",
+      "sections": [
+        {
+          "name": "",
+          "cuts": [
+            {
+              "length": 119.5,
+              "count": 2
+            },
+            {
+              "length": 13.5,
+              "count": 5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
