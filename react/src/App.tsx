@@ -1,6 +1,3 @@
-import Printd from 'printd';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import {
   Project,
   Wood,
@@ -11,8 +8,11 @@ import {
   selectTotalLength,
   selectWoodLength,
   selectWoodList,
-} from '../../core';
-import * as data from '../../core/data.json';
+} from '@cut-list-generator/core';
+import * as data from '@cut-list-generator/core/data.json';
+import Printd from 'printd';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './App.css';
 import { SectionComponent } from './components/Section';
 import { WoodComponent } from './components/Wood';

@@ -1,4 +1,4 @@
-import { Wood } from '../../../core';
+import { Wood } from '@cut-list-generator/core';
 
 export interface WoodStatsComponentProps {
   wood: Wood;

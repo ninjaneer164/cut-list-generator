@@ -1,10 +1,10 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
 import {
   CutListUtils,
   SetSectionColorActionProps,
   initialState,
-} from '../../../core';
+} from '@cut-list-generator/core';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cutListSlice = createSlice({
   name: 'cutList',

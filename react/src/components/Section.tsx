@@ -1,5 +1,5 @@
+import { Section } from '@cut-list-generator/core';
 import { ChangeEvent, useState } from 'react';
-import { Section } from '../../../core';
 import { setSectionColor } from '../store/cutListSlice';
 import { useAppDispatch } from '../store/hooks';
 

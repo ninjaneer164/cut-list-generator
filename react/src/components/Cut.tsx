@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
 import {
   Cut,
   selectBladeThicknessPercent,
   selectCutColor,
   selectWoodLength,
-} from '../../../core';
+} from '@cut-list-generator/core';
+import { useSelector } from 'react-redux';
 
 export interface CutComponentProps {
   cut: Cut;
