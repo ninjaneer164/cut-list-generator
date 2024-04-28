@@ -69,9 +69,24 @@
             background-color: white;
             border-right: 0.0625rem solid black;
             display: inline-flex;
+            flex-direction: column;
             height: 100%;
             justify-content: center;
             text-align: center;
+
+            &.angles {
+              .cut-angles,
+              .cut-length {
+                line-height: 0.9;
+                transform: scale(0.8);
+              }
+
+              .cut-angles {
+                span {
+                  margin: 0 0.25rem;
+                }
+              }
+            }
           }
         }
       }

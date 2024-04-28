@@ -15,14 +15,25 @@ export interface SectionData {
 }
 
 export const SectionUtils = {
-  create: (name: string, cuts: CutData[], color?: string): Section => {
+  create: (
+    name: string,
+    cuts: CutData[],
+    woodThickness: number,
+    color?: string
+  ): Section => {
     const c = color ?? getRandomColor();
     const id = uuid();
     const section: Section = {
       color: c,
       cuts: cuts
         .map((cut: CutData) => {
-          return CutUtils.create(cut.length, cut.count, c);
+          return CutUtils.create(
+            cut.length,
+            cut.count,
+            c,
+            woodThickness,
+            cut.miters
+          );
         })
         .flat(),
       id,

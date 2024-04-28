@@ -14,7 +14,12 @@ export interface ProjectData {
 }
 
 export const ProjectUtils = {
-  create: (name: string, sections: SectionData[], hues: number[]): Project => {
+  create: (
+    name: string,
+    sections: SectionData[],
+    hues: number[],
+    woodThickness: number
+  ): Project => {
     const id = uuid();
     const project = {
       id,
@@ -23,6 +28,7 @@ export const ProjectUtils = {
         const section = SectionUtils.create(
           s.name,
           s.cuts,
+          woodThickness,
           s.color ?? hsl2Rgb(hues.pop()! / 360, 0.5, 0.5) // `hsl(${hues.pop()},50%,50%)`
         );
         section.totalLength = section.cuts.reduce(

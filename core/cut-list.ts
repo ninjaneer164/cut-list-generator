@@ -22,7 +22,12 @@ export const CutListUtils = {
     const hues = Array.from({ length: nSections }, (_, i) => d * i).reverse();
     const cuts: any[] = [];
     const projects = data.projects.map((p: any) => {
-      const project = ProjectUtils.create(p.name, p.sections, hues);
+      const project = ProjectUtils.create(
+        p.name,
+        p.sections,
+        hues,
+        woodThickness
+      );
       project.totalLength = project.sections.reduce(
         (l, section) => l + section.totalLength,
         0

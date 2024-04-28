@@ -15,10 +15,12 @@ const CutComponent = ({ cut }: CutComponentProps) => {
   const bladeThicknessPercent = useSelector(selectBladeThicknessPercent);
   const woodLength = useSelector(selectWoodLength);
 
+  const showMiters = !!cut.miters.left || !!cut.miters.right;
+
   return (
     <>
       <div
-        className="cut"
+        className={`cut ${showMiters ? 'angles' : ''}`}
         id={`cut-${cut.id}`}
         key={`cut-${cut.id}`}
         style={{
@@ -27,7 +29,23 @@ const CutComponent = ({ cut }: CutComponentProps) => {
           width: `${(cut.length / woodLength) * 100}%`,
         }}
       >
-        <span>{cut.length}"</span>
+        <div className="cut-length">{cut.length}"</div>
+        {showMiters && (
+          <div className="cut-angles">
+            {cut.miters.left !== 0 && (
+              <span>
+                {Math.abs(cut.miters.left)}&deg;{' '}
+                {cut.miters.left > 0 ? '/' : cut.miters.left < 0 ? '\\' : ''}
+              </span>
+            )}
+            {cut.miters.right !== 0 && (
+              <span>
+                {cut.miters.right > 0 ? '\\' : cut.miters.right < 0 ? '/' : ''}{' '}
+                {Math.abs(cut.miters.right)}&deg;
+              </span>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

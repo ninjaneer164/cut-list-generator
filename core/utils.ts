@@ -14,6 +14,9 @@ export const printCutList = (element: HTMLElement, styles?: string[]): void => {
     window.printd.print(element, [appStyles, ...(styles || [])]);
   }
 };
+export const deg2rad = (deg: number): number => {
+  return Math.PI * (deg / 180);
+};
 export const uuid = (): string => {
   return crypto.randomUUID();
 };
