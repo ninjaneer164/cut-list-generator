@@ -9,11 +9,11 @@
   html {
     font-family: Roboto, system-ui, sans-serif;
     font-weight: 400;
-    margn: 0;
+    margin: 0;
     padding: 0;
 
     body {
-      margn: 0;
+      margin: 0;
       padding: 0;
     }
   }

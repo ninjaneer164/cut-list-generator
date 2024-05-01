@@ -1,0 +1,5 @@
+{
+  "numberOfCuts": "Number of cuts: {{totalCuts}} ({{totalLength}}\")",
+  "numberOfWood": "Number of wood ({{woodLength}}'): {{woodCount}} ({{woodPercentage}}%)",
+  "print": "Print"
+}

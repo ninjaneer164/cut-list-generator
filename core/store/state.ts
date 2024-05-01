@@ -9,4 +9,5 @@ export const initialState: CutListState = {
   totalLength: 0,
   woodLength: 144,
   woodList: [],
+  woodThickness: 1.5,
 };

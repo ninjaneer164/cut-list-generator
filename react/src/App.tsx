@@ -11,7 +11,8 @@ import {
 } from '@cut-list-generator/core';
 import * as data from '@cut-list-generator/core/data.json';
 import Printd from 'printd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import './App.css';
 import { SectionComponent } from './components/Section';
@@ -23,15 +24,17 @@ import { useAppDispatch } from './store/hooks';
 function App() {
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   const projects = useSelector(selectProjects);
   const woodList = useSelector(selectWoodList);
   const totalCuts = useSelector(selectTotalCuts);
   const totalLength = useSelector(selectTotalLength);
   const woodLength = useSelector(selectWoodLength);
-  const woodPercentage = (
-    (totalLength / (woodLength * woodList.length)) *
-    100
-  ).toFixed(2);
+
+  const [woodLengthFt, setWoodLengthFt] = useState<string>('0');
+  const [woodListLength, setWoodListLength] = useState<string>('0');
+  const [woodPercentage, setWoodPercentage] = useState<string>('0');
 
   useEffect(() => {
     initPrintd(new Printd());
@@ -40,6 +43,14 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setWoodLengthFt((woodLength / 12).toString());
+    setWoodListLength(woodList.length.toString());
+    setWoodPercentage(
+      ((totalLength / (woodLength * woodList.length)) * 100).toFixed(2)
+    );
+  }, [totalLength, woodLength, woodList]);
+
   const print = () => {
     printCutList(document.querySelector('.content-wrapper') as HTMLElement);
   };
@@ -47,27 +58,33 @@ function App() {
   return (
     <main>
       <div className="content-wrapper">
+        <div>{t('numberOfCuts', { totalCuts, totalLength })}</div>
         <div>
-          Number of cuts: {totalCuts} ({totalLength}")
+          {t('numberOfWood', {
+            woodLength: woodLengthFt,
+            woodCount: woodListLength,
+            woodPercentage,
+          })}
         </div>
         <div>
-          Number of wood ({woodLength / 12}'): {woodList.length} (
-          {woodPercentage}%)
-        </div>
-        <div>
-          {projects &&
-            projects.map((project: Project, i: number) => (
-              <div key={`project-${i}`}>
-                <p>{project.name}</p>
-                <ol>
-                  {project.sections.map((section, j) => (
-                    <li key={`section-${j}`}>
-                      <SectionComponent section={section} />
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
+          {projects && (
+            <ol>
+              {projects.map((project: Project, i: number) => (
+                <li key={`project-${i}`}>
+                  <div>
+                    <p>{project.name}</p>
+                    <ol type="a">
+                      {project.sections.map((section, j) => (
+                        <li key={`section-${j}`}>
+                          <SectionComponent section={section} />
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
         <div className="cutlist-wrapper">
           <div className="wood-col">
@@ -85,7 +102,7 @@ function App() {
         </div>
       </div>
       <div>
-        <button onClick={print}>Print</button>
+        <button onClick={print}>{t('print')}</button>
       </div>
     </main>
   );
