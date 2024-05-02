@@ -1,4 +1,6 @@
-import { Project } from '..';
+import { CutListState, Project } from '..';
+
+export const selectCutListState = (state: any): CutListState => state.cutList;
 
 export const selectCutColor = (cutId: string) => (state: any) => {
   let color: string = '';

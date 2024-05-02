@@ -1,4 +1,4 @@
-import appStyles from './styles.css?inline';
+// import appStyles from './styles.css?inline';
 
 declare global {
   interface Window {
@@ -11,7 +11,7 @@ export const initPrintd = (printd: any): void => {
 };
 export const printCutList = (element: HTMLElement, styles?: string[]): void => {
   if (window.printd) {
-    window.printd.print(element, [appStyles, ...(styles || [])]);
+    window.printd.print(element, [...(styles || [])]);
   }
 };
 export const deg2rad = (deg: number): number => {
