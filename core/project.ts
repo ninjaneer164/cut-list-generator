@@ -17,20 +17,22 @@ export const ProjectUtils = {
   create: (
     name: string,
     sections: SectionData[],
-    hues: number[],
-    woodThickness: number
+    materialThickness: number,
+    hues?: number[]
   ): Project => {
     const id = uuid();
-    const project = {
+    const project: Project = {
       id,
       name,
       sections: sections.map((s: SectionData) => {
         const section = SectionUtils.create(
           s.name,
           s.cuts,
-          woodThickness,
-          s.color ?? hsl2Rgb(hues.pop()! / 360, 0.5, 0.5) // `hsl(${hues.pop()},50%,50%)`
+          materialThickness,
         );
+        if (s.color || hues) {
+          section.color = s.color ?? hsl2Rgb(hues!.pop()! / 360, 0.5, 0.5) // `hsl(${hues.pop()},50%,50%)`
+        }
         section.totalLength = section.cuts.reduce(
           (l, cut) => l + cut.length,
           0

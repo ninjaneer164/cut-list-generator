@@ -1,4 +1,6 @@
 {
+  "woodLength": 144,
+  "woodThickness": 1.5,
   "projects": [
     {
       "name": "Mason's Room",

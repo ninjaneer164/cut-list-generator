@@ -1,7 +1,8 @@
 import {
+  CutListData,
   CutListUtils,
   SetSectionColorActionProps,
-  initialState,
+  initialState
 } from '@cut-list-generator/core';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
@@ -10,23 +11,22 @@ export const cutListSlice = createSlice({
   name: 'cutList',
   initialState,
   reducers: {
-    parseJson: (state, action: PayloadAction<unknown>) => {
+    parseJson: (state, action: PayloadAction<CutListData>) => {
       const {
         bladeThickness,
-        projects,
+        description,
+        materials,
+        title,
         totalCuts,
         totalLength,
-        woodLength,
-        woodList,
-        woodThickness,
       } = CutListUtils.parseJson(action.payload);
+
       state.bladeThickness = bladeThickness;
-      state.projects = projects;
+      state.description = description;
+      state.materials = materials;
+      state.title = title;
       state.totalCuts = totalCuts;
       state.totalLength = totalLength;
-      state.woodLength = woodLength;
-      state.woodList = woodList;
-      state.woodThickness = woodThickness;
     },
     setSectionColor: (
       state,
@@ -35,19 +35,22 @@ export const cutListSlice = createSlice({
       const {
         payload: { color, sectionId },
       } = action;
-      state.projects.some((project) => {
-        const section = project.sections.find(
-          (section) => section.id === sectionId
-        );
-        if (section) {
-          section.color = color;
-          section.cuts.forEach((cut) => {
-            cut.color = color;
-          });
-          return true;
-        }
-        return false;
-      });
+      state.materials.forEach((material) => {
+        material.projects.some((project) => {
+          const section = project.sections.find(
+            (section) => section.id === sectionId
+          );
+          if (section) {
+            section.color = color;
+            section.cuts.forEach((cut) => {
+              cut.color = color;
+            });
+            return true;
+          }
+          return false;
+        });
+      })
+      return;
     },
   },
 });

@@ -1,23 +1,18 @@
 import {
-  Project,
-  Wood,
+  CutListData,
   initPrintd,
   printCutList,
-  selectProjects,
-  selectTotalCuts,
-  selectTotalLength,
-  selectWoodLength,
-  selectWoodList,
+  selectDescription,
+  selectMaterials,
+  selectTitle,
 } from '@cut-list-generator/core';
 import * as data from '@cut-list-generator/core/data.json';
 import Printd from 'printd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import './App.css';
-import { SectionComponent } from './components/Section';
-import { WoodComponent } from './components/Wood';
-import { WoodStatsComponent } from './components/WoodStats';
+import { MaterialComponent } from './components/Material';
 import { parseJson } from './store/cutListSlice';
 import { useAppDispatch } from './store/hooks';
 
@@ -26,79 +21,36 @@ function App() {
 
   const { t } = useTranslation();
 
-  const projects = useSelector(selectProjects);
-  const woodList = useSelector(selectWoodList);
-  const totalCuts = useSelector(selectTotalCuts);
-  const totalLength = useSelector(selectTotalLength);
-  const woodLength = useSelector(selectWoodLength);
-
-  const [woodLengthFt, setWoodLengthFt] = useState<string>('0');
-  const [woodListLength, setWoodListLength] = useState<string>('0');
-  const [woodPercentage, setWoodPercentage] = useState<string>('0');
+  const title = useSelector(selectTitle);
+  const description = useSelector(selectDescription);
+  const materials = useSelector(selectMaterials);
 
   useEffect(() => {
     initPrintd(new Printd());
 
-    dispatch(parseJson(data));
+    dispatch(parseJson(data as CutListData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setWoodLengthFt((woodLength / 12).toString());
-    setWoodListLength(woodList.length.toString());
-    setWoodPercentage(
-      ((totalLength / (woodLength * woodList.length)) * 100).toFixed(2)
-    );
-  }, [totalLength, woodLength, woodList]);
-
   const print = () => {
-    printCutList(document.querySelector('.content-wrapper') as HTMLElement);
+    printCutList(document.querySelector('.content-wrapper') as HTMLElement, [
+      'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
+      '.section-name { color: white; }',
+    ]);
   };
 
   return (
     <main>
       <div className="content-wrapper">
-        <div>{t('numberOfCuts', { totalCuts, totalLength })}</div>
-        <div>
-          {t('numberOfWood', {
-            woodLength: woodLengthFt,
-            woodCount: woodListLength,
-            woodPercentage,
-          })}
-        </div>
-        <div>
-          {projects && (
-            <ol>
-              {projects.map((project: Project, i: number) => (
-                <li key={`project-${i}`}>
-                  <div>
-                    <p>{project.name}</p>
-                    <ol type="a">
-                      {project.sections.map((section, j) => (
-                        <li key={`section-${j}`}>
-                          <SectionComponent section={section} />
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          )}
-        </div>
-        <div className="cutlist-wrapper">
-          <div className="wood-col">
-            {woodList &&
-              woodList.map((wood: Wood, i: number) => (
-                <WoodComponent key={`wood-${i}`} wood={wood} />
-              ))}
-          </div>
-          <div className="stats-col">
-            {woodList &&
-              woodList.map((wood: Wood, i: number) => (
-                <WoodStatsComponent key={`wood-stats-${i}`} wood={wood} />
-              ))}
-          </div>
+        {title && <h1>{title}</h1>}
+        {description && <p className="description">{description}</p>}
+        <div className="materials-wrapper">
+          {materials &&
+            materials.map((material, i) => (
+              <div className="material-wrapper" key={`material-${i}`}>
+                <MaterialComponent material={material} />
+              </div>
+            ))}
         </div>
       </div>
       <div>

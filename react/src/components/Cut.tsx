@@ -1,19 +1,22 @@
 import {
   Cut,
-  selectBladeThicknessPercent,
+  selectBladeThicknessPercentByMaterialId,
   selectCutColor,
-  selectWoodLength,
+  selectMaterialLength,
 } from '@cut-list-generator/core';
 import { useSelector } from 'react-redux';
 
 export interface CutComponentProps {
   cut: Cut;
+  materialId: string;
 }
 
-const CutComponent = ({ cut }: CutComponentProps) => {
+const CutComponent = ({ cut, materialId }: CutComponentProps) => {
   const bgColor = useSelector(selectCutColor(cut.id));
-  const bladeThicknessPercent = useSelector(selectBladeThicknessPercent);
-  const woodLength = useSelector(selectWoodLength);
+  const bladeThicknessPercent = useSelector(
+    selectBladeThicknessPercentByMaterialId(materialId)
+  );
+  const materialLength = useSelector(selectMaterialLength(materialId));
 
   const showMiters = !!cut.miters.left || !!cut.miters.right;
 
@@ -24,9 +27,9 @@ const CutComponent = ({ cut }: CutComponentProps) => {
         id={`cut-${cut.id}`}
         key={`cut-${cut.id}`}
         style={{
-          backgroundColor: bgColor,
+          backgroundColor: bgColor ?? cut.color,
           marginRight: `${bladeThicknessPercent}%`,
-          width: `${(cut.length / woodLength) * 100}%`,
+          width: `${(cut.length / materialLength) * 100}%`,
         }}
       >
         <div className="cut-length">{cut.length}"</div>
