@@ -44,7 +44,7 @@ const MaterialComponent = ({ material }: MaterialComponentProps) => {
             ).toFixed(2),
           })}
         </div>
-        <div>
+        <div className="projects-wrapper">
           {projects && (
             <ol>
               {projects.map((project: Project, i: number) => (

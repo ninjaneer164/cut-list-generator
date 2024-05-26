@@ -42,8 +42,8 @@ function App() {
   return (
     <main>
       <div className="content-wrapper">
-        {title && <h1>{title}</h1>}
-        {description && <p className="description">{description}</p>}
+        {title && <h1 className="mb-2">{title}</h1>}
+        {description && <p className="description mb-2">{description}</p>}
         <div className="materials-wrapper">
           {materials &&
             materials.map((material, i) => (
@@ -53,7 +53,7 @@ function App() {
             ))}
         </div>
       </div>
-      <div>
+      <div className="mt-4">
         <button onClick={print}>{t('print')}</button>
       </div>
     </main>
