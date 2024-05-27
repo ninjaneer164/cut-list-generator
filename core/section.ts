@@ -1,4 +1,4 @@
-import { Cut, CutData, CutUtils, getRandomColor, uuid } from '.';
+import { Cut, CutData, CutUtils, Utils, getRandomColor } from '.';
 
 export interface Section {
   color: string;
@@ -22,7 +22,7 @@ export const SectionUtils = {
     color?: string
   ): Section => {
     const c = color ?? getRandomColor();
-    const id = uuid();
+    const id = Utils.uuid();
     const section: Section = {
       color: c,
       cuts: cuts

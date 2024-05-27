@@ -1,4 +1,4 @@
-import { Cut, Section, SectionData, SectionUtils, hsl2Rgb, uuid } from '.';
+import { Cut, Section, SectionData, SectionUtils, Utils, hsl2Rgb } from '.';
 
 export interface Project {
   id: string;
@@ -20,18 +20,14 @@ export const ProjectUtils = {
     materialThickness: number,
     hues?: number[]
   ): Project => {
-    const id = uuid();
+    const id = Utils.uuid();
     const project: Project = {
       id,
       name,
       sections: sections.map((s: SectionData) => {
-        const section = SectionUtils.create(
-          s.name,
-          s.cuts,
-          materialThickness,
-        );
+        const section = SectionUtils.create(s.name, s.cuts, materialThickness);
         if (s.color || hues) {
-          section.color = s.color ?? hsl2Rgb(hues!.pop()! / 360, 0.5, 0.5) // `hsl(${hues.pop()},50%,50%)`
+          section.color = s.color ?? hsl2Rgb(hues!.pop()! / 360, 0.5, 0.5); // `hsl(${hues.pop()},50%,50%)`
         }
         section.totalLength = section.cuts.reduce(
           (l, cut) => l + cut.length,

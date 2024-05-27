@@ -1,4 +1,4 @@
-import { deg2rad, uuid } from '.';
+import { Utils } from './utils';
 
 export interface Cut {
   color: string;
@@ -29,7 +29,7 @@ export const CutUtils = {
   ): Cut[] => {
     const _ = (a: number): number => {
       return a && a > 0
-        ? Math.ceil(woodThickness * Math.tan(deg2rad(a)) * 2) / 2
+        ? Math.ceil(woodThickness * Math.tan(Utils.deg2rad(a)) * 2) / 2
         : 0;
     };
     const l = _(miters?.left!);
@@ -41,7 +41,7 @@ export const CutUtils = {
         right: miters?.right ?? 0,
       },
       color,
-      id: uuid(),
+      id: Utils.uuid(),
       isCut: false,
       length: length + l + r,
     }));

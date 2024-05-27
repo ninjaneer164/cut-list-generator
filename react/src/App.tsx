@@ -1,7 +1,6 @@
 import {
   CutListData,
-  initPrintd,
-  printCutList,
+  Utils,
   selectDescription,
   selectMaterials,
   selectTitle,
@@ -26,24 +25,27 @@ function App() {
   const materials = useSelector(selectMaterials);
 
   useEffect(() => {
-    initPrintd(new Printd());
+    Utils.initPrintd(new Printd());
 
     dispatch(parseJson(data as CutListData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const print = () => {
-    printCutList(document.querySelector('.content-wrapper') as HTMLElement, [
-      'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
-      '.section-name { color: white; }',
-    ]);
+    Utils.printCutList(
+      document.querySelector('.content-wrapper') as HTMLElement,
+      [
+        'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
+        '.section-name { color: white; }',
+      ]
+    );
   };
 
   return (
     <main>
       <div className="content-wrapper">
         {title && <h1 className="mb-2">{title}</h1>}
-        {description && <p className="description mb-2">{description}</p>}
+        {description && <p className="description mb-4">{description}</p>}
         <div className="materials-wrapper">
           {materials &&
             materials.map((material, i) => (

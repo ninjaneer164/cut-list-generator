@@ -2,7 +2,8 @@ import {
   CutListData,
   CutListUtils,
   SetSectionColorActionProps,
-  initialState
+  Utils,
+  initialState,
 } from '@cut-list-generator/core';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
@@ -35,22 +36,11 @@ export const cutListSlice = createSlice({
       const {
         payload: { color, sectionId },
       } = action;
-      state.materials.forEach((material) => {
-        material.projects.some((project) => {
-          const section = project.sections.find(
-            (section) => section.id === sectionId
-          );
-          if (section) {
-            section.color = color;
-            section.cuts.forEach((cut) => {
-              cut.color = color;
-            });
-            return true;
-          }
-          return false;
-        });
-      })
-      return;
+      state.materials = Utils.setSectionColor(
+        state.materials,
+        sectionId,
+        color
+      );
     },
   },
 });

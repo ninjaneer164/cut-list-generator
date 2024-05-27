@@ -1,4 +1,12 @@
-import { Cut, Project, ProjectData, ProjectUtils, Wood, WoodData, uuid } from '.';
+import {
+  Cut,
+  Project,
+  ProjectData,
+  ProjectUtils,
+  Utils,
+  Wood,
+  WoodData,
+} from '.';
 
 export interface Material {
   id: string;
@@ -21,27 +29,20 @@ export interface MaterialData {
 }
 
 export const MaterialUtils = {
-  create: (
-    data: MaterialData,
-    bladeThickness: number
-  ): [Material, number] => {
+  create: (data: MaterialData, bladeThickness: number): [Material, number] => {
     let nSections = 0;
     const cuts: any[] = [];
     let totalLength: number = 0;
     const material = {
       ...data,
-      id: uuid(),
+      id: Utils.uuid(),
       projects: data.projects.map((p: any) => {
-        const project = ProjectUtils.create(
-          p.name,
-          p.sections,
-          data.thickness
-        );
+        const project = ProjectUtils.create(p.name, p.sections, data.thickness);
         nSections += project.sections.length;
         cuts.push(ProjectUtils.getCuts(project));
         totalLength += project.totalLength;
         return project;
-      })
+      }),
     } as Material;
     material.totalLength = totalLength;
 
@@ -95,5 +96,5 @@ export const MaterialUtils = {
     material.woodList = woodList.map((wood) => wood.toWood());
 
     return [material, nSections];
-  }
+  },
 };
