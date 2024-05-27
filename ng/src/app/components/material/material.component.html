@@ -1,0 +1,53 @@
+<div class="material">
+  <h2>{{ material.name }} ({{ material.length / 12 }}')</h2>
+  <div class="material-stats">
+    {{ 'numberOfCuts' | translate: material }}
+  </div>
+  <div class="material-stats">
+    {{
+      'numberOfWood'
+        | translate
+          : {
+              woodLength: material.length / 12,
+              woodCount: material.woodList.length,
+              woodPercentage: (
+                (material.totalLength /
+                  (material.length * material.woodList.length)) *
+                100
+              ).toFixed(2)
+            }
+    }}
+  </div>
+  <div class="projects-wrapper">
+    <ng-container *ngIf="projects">
+      <ol>
+        <ng-container *ngFor="let project of projects">
+          <li>
+            <div>
+              <p class="project-name">{{ project.name }}</p>
+              <ol type="a">
+                <ng-container *ngFor="let section of project.sections">
+                  <li>
+                    <app-section [section]="section"></app-section>
+                  </li>
+                </ng-container>
+              </ol>
+            </div>
+          </li>
+        </ng-container>
+      </ol>
+    </ng-container>
+  </div>
+  <div class="cutlist-wrapper">
+    <div class="wood-col">
+      <ng-container *ngFor="let wood of woodList">
+        <app-wood [materialId]="material.id" [wood]="wood"></app-wood>
+      </ng-container>
+    </div>
+    <div class="stats-col">
+      <ng-container *ngFor="let wood of woodList">
+        <app-wood-stats [wood]="wood"></app-wood-stats>
+      </ng-container>
+    </div>
+  </div>
+</div>

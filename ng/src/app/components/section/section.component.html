@@ -1,0 +1,4 @@
+<div class="section-name" [ngStyle]="{ backgroundColor: bgColor }">
+  <span>{{ section.name }}</span>
+  <input type="color" [value]="bgColor" (change)="onChangeColor($event)" />
+</div>

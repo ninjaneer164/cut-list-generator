@@ -1,0 +1,13 @@
+<div
+  class="cut w-full"
+  [ngClass]="{ angles: showMiters }"
+  [ngStyle]="{ backgroundColor }"
+>
+  <div class="cut-length">{{ cut.length }}"</div>
+  <ng-container *ngIf="showMiters">
+    <div class="cut-angles">
+      <ng-container *ngIf="cut.miters.left !== 0"> </ng-container>
+      <ng-container *ngIf="cut.miters.right !== 0"> </ng-container>
+    </div>
+  </ng-container>
+</div>

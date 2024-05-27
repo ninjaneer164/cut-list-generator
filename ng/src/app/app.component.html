@@ -1,0 +1,22 @@
+<main>
+  <div class="content-wrapper">
+    <ng-container *ngIf="title">
+      <h1 class="mb-2">{{ title }}</h1>
+    </ng-container>
+    <ng-container *ngIf="description">
+      <p class="description mb-4">{{ description }}</p>
+    </ng-container>
+    <div class="materials-wrapper">
+      <ng-container *ngIf="materials">
+        <ng-container *ngFor="let material of materials">
+          <div class="material-wrapper">
+            <app-material [material]="material"></app-material>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button onClick="print()">{{ 'print' | translate }}</button>
+  </div>
+</main>

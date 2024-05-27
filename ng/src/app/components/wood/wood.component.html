@@ -1,0 +1,11 @@
+<div class="wood">
+  <ng-container *ngIf="wood && wood.cuts">
+    <ng-container *ngFor="let cut of wood.cuts; let i = index">
+      <app-cut
+        [cut]="cut"
+        [materialId]="materialId"
+        [ngStyle]="{ paddingRight, width: getCutWidthPercent(cut.length) }"
+      ></app-cut>
+    </ng-container>
+  </ng-container>
+</div>
