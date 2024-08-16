@@ -1,14 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Wood, selectBladeThicknessPercentByMaterialId } from '@core';
 import { Store } from '@ngrx/store';
 import { selectMaterialLength } from '@store';
 import { combineLatest } from 'rxjs';
+import { CutComponent } from '../cut/cut.component';
 
 @Component({
   selector: 'app-wood',
   templateUrl: './wood.component.html',
   styleUrls: ['./wood.component.scss'],
+  standalone: true,
+  imports: [CommonModule, CutComponent],
 })
 export class WoodComponent implements OnInit {
   @Input()

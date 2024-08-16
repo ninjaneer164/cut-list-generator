@@ -3,26 +3,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  CutComponent,
-  MaterialComponent,
-  SectionComponent,
-  WoodComponent,
-  WoodStatsComponent,
-} from '@components';
+import { MaterialComponent } from '@components';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { cutListReducer } from '@store';
 import { AppComponent } from './app.component';
 
-const components = [
-  AppComponent,
-  CutComponent,
-  MaterialComponent,
-  SectionComponent,
-  WoodComponent,
-  WoodStatsComponent,
-];
+const components = [AppComponent];
 const ngModules = [
   CommonModule,
   BrowserModule,
@@ -42,7 +29,7 @@ const stores = [
 
 @NgModule({
   declarations: [...components],
-  imports: [...ngModules, ...modules, ...stores],
+  imports: [...ngModules, ...modules, ...stores, MaterialComponent],
   providers: [],
   exports: [],
   bootstrap: [AppComponent],

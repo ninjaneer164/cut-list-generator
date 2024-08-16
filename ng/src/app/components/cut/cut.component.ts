@@ -1,13 +1,16 @@
+import { CommonModule, NgClass, NgStyle } from '@angular/common';
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Cut, selectCutColor } from '@core';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-cut',
   templateUrl: './cut.component.html',
   styleUrls: ['./cut.component.scss'],
+  standalone: true,
+  imports: [CommonModule, NgClass, NgStyle, StoreModule],
 })
 export class CutComponent implements OnInit {
   @Input()

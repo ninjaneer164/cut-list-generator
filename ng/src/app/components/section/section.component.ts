@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Section } from '@core';
 import { Store } from '@ngrx/store';
@@ -7,6 +8,8 @@ import { CutListActions } from '../../store/acions';
   selector: 'app-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
+  standalone: true,
+  imports: [NgStyle],
 })
 export class SectionComponent {
   @Input()
