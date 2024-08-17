@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Material, Utils } from '@core';
+import { Material } from '@core';
 import json from '@core/data.json';
 import en from '@core/i18n/en.json';
 import { Store } from '@ngrx/store';
@@ -32,8 +32,6 @@ export class AppComponent {
 
     this.store.dispatch(CutListActions.parseJson({ json }));
 
-    Utils.initPrintd(new Printd());
-
     combineLatest([
       this.store.select(selectTitle),
       this.store.select(selectDescription),
@@ -48,12 +46,16 @@ export class AppComponent {
   }
 
   public print(): void {
-    Utils.printCutList(
-      document.querySelector('.content-wrapper') as HTMLElement,
-      [
-        'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
-        '.section-name { color: white; }',
-      ]
+    const appStyles = Array.from(document!.styleSheets!.item(0)!.cssRules).map(
+      (r) => r.cssText
     );
+    const printd = new Printd();
+    const element = document.querySelector('.content-wrapper') as HTMLElement;
+    const styles = [
+      'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
+      '.material-wrapper { border-color: black; }',
+      '.section-name { color: white; }',
+    ];
+    printd.print(element, [...appStyles, ...styles]);
   }
 }

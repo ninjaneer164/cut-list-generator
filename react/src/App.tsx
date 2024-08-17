@@ -1,12 +1,10 @@
 import {
   CutListData,
-  Utils,
   selectDescription,
   selectMaterials,
   selectTitle,
 } from '@cut-list-generator/core';
 import * as data from '@cut-list-generator/core/data.json';
-import Printd from 'printd';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -14,6 +12,9 @@ import './App.css';
 import { MaterialComponent } from './components/Material';
 import { parseJson } from './store/cutListSlice';
 import { useAppDispatch } from './store/hooks';
+
+import Printd from 'printd';
+import appStyles from '../../core/styles.css?inline';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,21 +26,19 @@ function App() {
   const materials = useSelector(selectMaterials);
 
   useEffect(() => {
-    Utils.initPrintd(new Printd());
-
     dispatch(parseJson(data as CutListData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const print = () => {
-    Utils.printCutList(
-      document.querySelector('.content-wrapper') as HTMLElement,
-      [
-        'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
-        '.material-wrapper { border-color: black; }',
-        '.section-name { color: white; }',
-      ]
-    );
+    const printd = new Printd();
+    const element = document.querySelector('.content-wrapper') as HTMLElement;
+    const styles = [
+      'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
+      '.material-wrapper { border-color: black; }',
+      '.section-name { color: white; }',
+    ];
+    printd.print(element, [appStyles, ...styles]);
   };
 
   return (
