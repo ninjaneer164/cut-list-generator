@@ -106,7 +106,7 @@
               @apply ml-2;
 
               .wood-stats {
-                @apply border border-black flex flex-col text-[0.625rem] h-8 my-1;
+                @apply border border-none flex flex-col text-[0.625rem] h-8 my-1;
               }
             }
           }
