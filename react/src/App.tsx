@@ -36,6 +36,7 @@ function App() {
       document.querySelector('.content-wrapper') as HTMLElement,
       [
         'h1, h2, li, .description, .material-stats, .project-name, .stats-col { color: black; }',
+        '.material-wrapper { border-color: black; }',
         '.section-name { color: white; }',
       ]
     );
